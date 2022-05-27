@@ -9,5 +9,26 @@ const getImage = async function () {
     );
     const images = await res.json();
     console.log(images);
+    selectRandomImage(images);
 };
-getImage();
+
+
+const selectRandomImage = function (images) {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    //console.log(randomIndex); spitting out a random number to know its working, then delete this line
+    const randomImage = images[randomIndex];
+    // console.log(randomImage); this spits out a random author, download url, height width, etc. but then deleted
+    displayImage(randomImage);
+};
+
+const displayImage = function (randomImage) {
+    const author = randomImage.author;
+    const imageAddress = randomImage.download_url;
+    authorSpan.innertext = author;
+    img.src = imageAddress;
+    imgDiv.classList.remove("hide");
+};
+
+button.addEventListener("click", function(){
+    getImage();
+});
